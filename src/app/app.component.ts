@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Recipe-Store';
+  loadedSection: string = 'recipes';
+  title = 'Recipe Store';
+
+  onNavigate(sectionId: string){
+    this.loadedSection = sectionId;
+  }
 }
