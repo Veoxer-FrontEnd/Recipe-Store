@@ -9,6 +9,8 @@ export class AppComponent {
   loadedSection: string = 'recipes';
   title = 'Recipe Store';
 
+  constructor(){}
+
   onNavigate(sectionId: string){
     this.loadedSection = sectionId;
   }
