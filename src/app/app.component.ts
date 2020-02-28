@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   // loadedSection: string = 'recipes';
-  // title = 'Recipe Store';
+  title = 'Recipe Store';
 
   constructor(){}
 
