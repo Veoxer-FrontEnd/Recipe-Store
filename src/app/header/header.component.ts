@@ -1,21 +1,22 @@
-import { Component, Output, ElementRef, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector:'app-header',
-    templateUrl:'./header.component.html'
+    templateUrl:'./header.component.html',
+    styleUrls: ['./header.component.css']
 })
 export class HeaderComponent{
 
-    @Output() loadSection = new EventEmitter<string>();
+    // @Output() loadSection = new EventEmitter<string>();
 
     constructor() {
     }
 
-    loadRecipes(){
-        this.loadSection.emit("recipes");
-    }
+    // loadRecipes(){
+    //     this.loadSection.emit("recipes");
+    // }
 
-    loadShoppingList(){
-        this.loadSection.emit("shoppingList");
-    }
+    // loadShoppingList(){
+    //     this.loadSection.emit("shoppingList");
+    // }
 }
