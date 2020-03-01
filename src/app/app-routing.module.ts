@@ -7,14 +7,14 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 const route: Routes = [
-    {path: "https://veoxer.com", redirectTo: 'https://veoxer.com/recipes', pathMatch: 'full'},
-    {path: "https://veoxer.com/recipes", component: RecipesComponent, children: [
+    {path: "", redirectTo: '/recipes', pathMatch: 'full'},
+    {path: "recipes", component: RecipesComponent, children: [
         {path: "", component: RecipeStartComponent },
         {path: "recipe/:id", component: RecipeDetailComponent},
         {path: "recipe/:id/edit", component: RecipeEditComponent},
         {path: "add", component: RecipeEditComponent},
     ]},
-    {path: "https://veoxer.com/shopping-list", component: ShoppingListComponent},
+    {path: "shopping-list", component: ShoppingListComponent},
 ];
 
 @NgModule({
