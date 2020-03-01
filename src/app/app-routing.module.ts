@@ -10,9 +10,9 @@ const route: Routes = [
     {path: "", redirectTo: '/recipes', pathMatch: 'full'},
     {path: "recipes", component: RecipesComponent, children: [
         {path: "", component: RecipeStartComponent },
-        {path: "recipe/:id", component: RecipeDetailComponent},
-        {path: "recipe/:id/edit", component: RecipeEditComponent},
         {path: "add", component: RecipeEditComponent},
+        {path: ":id", component: RecipeDetailComponent},
+        {path: ":id/edit", component: RecipeEditComponent},
     ]},
     {path: "shopping-list", component: ShoppingListComponent},
 ];
