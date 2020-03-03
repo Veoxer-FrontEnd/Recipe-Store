@@ -17,7 +17,7 @@ export class RecipesListComponent implements OnInit {
   }
 
   manageRecipe(recipeEl: Recipe){
-    this.recipeService.manageRecipe.emit(recipeEl);
+    this.recipeService.manageRecipe.next(recipeEl);
   }
 
 }
