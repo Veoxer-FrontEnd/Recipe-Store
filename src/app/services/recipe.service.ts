@@ -26,6 +26,7 @@ export class RecipeService {
     new Ingredient("Tomatoes", 3)
   ])];
   manageRecipe = new Subject<Recipe>();
+  manageRecipesList = new Subject<Recipe[]>();
   
   constructor(private shoppingService: ShoppingService) { }
 
@@ -44,5 +45,30 @@ export class RecipeService {
     //     this.shoppingService.addShoppingItem(ingredientElement);
     //   } 
     // )
+  }
+
+  addRecipe(recipe: Recipe): number{
+    recipe.Id = this.recipes.length + 1;
+    this.recipes.push(recipe);
+    this.manageRecipesList.next(this.recipes.slice());
+
+    return recipe.Id;
+  }
+
+  updateRecipe(id:number, recipe: Recipe){
+    const index = this.recipes.findIndex(recip => recip.Id === id);
+    recipe.Id = id;
+
+    if(index > -1){
+      this.recipes[index] = recipe;
+    }
+
+    this.manageRecipesList.next(this.recipes.slice());
+  }
+
+  deleteRecipe(id: number){
+    const index = this.recipes.findIndex(recip => recip.Id === id);
+    this.recipes.splice(index, 1);
+    this.manageRecipesList.next(this.recipes.slice());
   }
 }
