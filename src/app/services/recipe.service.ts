@@ -10,14 +10,14 @@ import { Subject } from 'rxjs';
 export class RecipeService {
 
   private recipes: Recipe[] = [
-    new Recipe(1,
+    new Recipe(null,
       'Pork Steak', 
     'Awesomeness in every bite !', 
     'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg',
     [new Ingredient("Meat", 1),
     new Ingredient("BBQ Sauce", 2)
   ], 0),
-    new Recipe(2,
+    new Recipe(null,
       'Tempeh Salad', 
     'Fresh vegan food', 
     'https://cdn.pixabay.com/photo/2016/04/21/12/38/tempeh-1343291_960_720.jpg',

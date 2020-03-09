@@ -43,7 +43,7 @@ export class RecipeEditComponent implements OnInit {
       recipeName = editedRecipe.Name;
       recipeDescription = editedRecipe.Description;
       recipeImgPath = editedRecipe.ImgPath;
-      recipeState = editedRecipe.Id > 0 ? 1 : 0;
+      recipeState = editedRecipe.Id  != null ? 1 : 0;
       if(editedRecipe['Ingredients']){
         for(let ingredient of editedRecipe.Ingredients){
           recipeIngredients.push(
