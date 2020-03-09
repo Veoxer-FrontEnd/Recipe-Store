@@ -6,15 +6,15 @@ import { RecipesStorageService } from '../services/recipes-storage.service';
 @Pipe({
     name: 'deletedrecipesfilter'
 })
-export class DeletedRecipesFilter implements PipeTransform{
-    transform(value: any){
-        if(value.length < 1){
+export class DeletedRecipesFilter implements PipeTransform {
+    transform(value: any) {
+        if (value.length < 1) {
             return value;
         }
 
         const recipes: Recipe[] = [];
-        for(const recipe of value){
-            if(recipe.State !== 2){
+        for (const recipe of value) {
+            if (recipe.state !== 2) {
                 recipes.push(recipe);
             }
         }

@@ -19,7 +19,7 @@ export class HeaderComponent {
 
     onFetchData() {
         this.recipesStorageService.fetchRecipes().subscribe(data => {
-            console.log(data)
+            console.log(data);
         }, error => {
             console.log(error);
         });

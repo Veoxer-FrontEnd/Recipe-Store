@@ -21,11 +21,11 @@ export class RecipesListComponent implements OnInit, OnDestroy {
     });
   }
 
-  manageRecipe(recipeEl: Recipe){
+  manageRecipe(recipeEl: Recipe) {
     this.recipeService.manageRecipe.next(recipeEl);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.recipesListSubscription.unsubscribe();
   }
 

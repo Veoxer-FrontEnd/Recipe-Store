@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from '../recipe.model';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
-import { Ingredient } from 'src/app/shared/ingredient.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -13,10 +11,10 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
 export class RecipeEditComponent implements OnInit {
 
   id: number;
-  editMode: boolean = false;
+  editMode = false;
   recipeForm: FormGroup;
-  get ingredientsForm(){
-    return (<FormArray>this.recipeForm.get('Ingredients')).controls;
+  get ingredientsForm() {
+    return (this.recipeForm.get('ingredients') as FormArray).controls;
   }
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService, private router: Router) { }
@@ -24,71 +22,75 @@ export class RecipeEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
-        this.id = +params['id'];
-        this.editMode = this.id != null && !isNaN(this.id)  ? true : false;
+        this.id = +params.id;
+        this.editMode = this.id != null && !isNaN(this.id);
         this.onFormInit();
       }
     );
   }
 
-  private onFormInit(){
+  private onFormInit() {
+    let recipeId = 0;
     let recipeName = '';
     let recipeDescription = '';
     let recipeImgPath = '';
     let recipeState = 0;
-    let recipeIngredients = new FormArray([]);
+    const recipeIngredients = new FormArray([]);
 
-    if(this.editMode){
+    if (this.editMode) {
       const editedRecipe = this.recipeService.onLoadRecipeDetails(this.id);
-      recipeName = editedRecipe.Name;
-      recipeDescription = editedRecipe.Description;
-      recipeImgPath = editedRecipe.ImgPath;
-      recipeState = editedRecipe.Id  != null ? 1 : 0;
-      if(editedRecipe['Ingredients']){
-        for(let ingredient of editedRecipe.Ingredients){
+      recipeId = editedRecipe.id;
+      recipeName = editedRecipe.name;
+      recipeDescription = editedRecipe.description;
+      recipeImgPath = editedRecipe.imgPath;
+      recipeState = editedRecipe.id  != null && editedRecipe.id > 0 ? 1 : 0;
+      if (editedRecipe.ingredients) {
+        for (const ingredient of editedRecipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
-              'name': new FormControl(ingredient.name, Validators.required),
-              'amount': new FormControl(ingredient.amount, [Validators.pattern(/^[1-9][0-9]*$/), Validators.required])
+              id: new FormControl(ingredient.id),
+              name: new FormControl(ingredient.name, Validators.required),
+              amount: new FormControl(ingredient.amount, [Validators.pattern(/^[1-9][0-9]*$/), Validators.required])
           }));
         }
       }
     }
 
     this.recipeForm = new FormGroup({
-      'Name': new FormControl(recipeName, Validators.required),
-      'Description': new FormControl(recipeDescription, Validators.required),
-      'ImgPath' : new FormControl(recipeImgPath, Validators.required),
-      'State' : new FormControl(recipeState, Validators.required),
-      'Ingredients': recipeIngredients
+      id: new FormControl(recipeId),
+      name: new FormControl(recipeName, Validators.required),
+      description: new FormControl(recipeDescription, Validators.required),
+      imgPath : new FormControl(recipeImgPath, Validators.required),
+      state : new FormControl(recipeState, Validators.required),
+      ingredients: recipeIngredients
     });
   }
 
-  onAddIngredients(){
-    (<FormArray>this.recipeForm.get("Ingredients")).push(new FormGroup({
-      'name': new FormControl(null, Validators.required),
-      'amount': new FormControl(null, Validators.required)
+  onAddIngredients() {
+    (this.recipeForm.get('ingredients') as FormArray).push(new FormGroup({
+      id: new FormControl(0),
+      name: new FormControl(null, Validators.required),
+      amount: new FormControl(null, Validators.required)
     }));
   }
 
-  onDeleteIngredient(index: number){
-    (<FormArray>this.recipeForm.get('Ingredients')).removeAt(index);
+  onDeleteIngredient(index: number) {
+    (this.recipeForm.get('ingredients') as FormArray).removeAt(index);
   }
 
-  onCancel(){
+  onCancel() {
     this.router.navigate(['recipes']);
   }
 
   onSubmit() {
     let newId = this.id;
 
-    if(this.editMode){
+    if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
-    }
-    else{
+    } else {
       newId = this.recipeService.addRecipe(this.recipeForm.value);
     }
-    
+
     this.router.navigate(['recipes', newId]);
     // console.log(this.recipeForm);
   }

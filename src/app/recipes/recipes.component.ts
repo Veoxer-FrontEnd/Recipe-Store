@@ -16,14 +16,14 @@ export class RecipesComponent implements OnInit, OnDestroy {
 
   constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.manageRecipeSubscription = this.recipeService.manageRecipe.subscribe(
       (recipe: Recipe) => {
         this.recipeDetail = recipe;
-      })
+      });
   }
 
-  onAddRecipe(){
+  onAddRecipe() {
     this.router.navigate(['add'], {relativeTo: this.route});
   }
 
@@ -31,7 +31,7 @@ export class RecipesComponent implements OnInit, OnDestroy {
   //   this.recipeDetail = recipe;
   // }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.manageRecipeSubscription.unsubscribe();
   }
 }

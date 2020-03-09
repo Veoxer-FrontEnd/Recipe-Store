@@ -9,7 +9,7 @@ export class AppComponent {
   // loadedSection: string = 'recipes';
   title = 'Recipe Store';
 
-  constructor(){}
+  constructor() {}
 
   // onNavigate(sectionId: string){
   //   this.loadedSection = sectionId;

@@ -1,11 +1,11 @@
-<a [routerLink]="[recipeItem.Id]"
+<a [routerLink]="[id]"
  routerLinkActive="active"
 class="list-group-item clearfix" >
     <div class="pull-left">
-        <h4 class="list-group-item-heading">{{ recipeItem.Name }}</h4>
-        <p class="list-group-item-text">{{ recipeItem.Description }}</p>
+        <h4 class="list-group-item-heading">{{ recipeItem.name }}</h4>
+        <p class="list-group-item-text">{{ recipeItem.description }}</p>
     </div>
     <div class="pull-right">
-        <img src="{{ recipeItem.ImgPath }}" alt="" class="img-responsive" style="max-height: 50px;">
+        <img src="{{ recipeItem.imgPath }}" alt="" class="img-responsive" style="max-height: 50px;">
     </div>
 </a>

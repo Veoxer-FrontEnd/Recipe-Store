@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingService } from 'src/app/services/shopping.service';
 import { NgForm } from '@angular/forms';
@@ -37,11 +37,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     // const ingName = this.inputName.nativeElement.value;
     // const ingAmount = this.inputAmount.nativeElement.value;
-    const newIng = new Ingredient(this.shoppingForm.value.inputName, this.shoppingForm.value.inputAmount);
+    const newIng = new Ingredient(0, this.shoppingForm.value.inputName, this.shoppingForm.value.inputAmount);
     if (this.editMode) {
       this.shoppingService.onUpdateIngredient(this.editedIndex, newIng);
-    }
-    else {
+    } else {
       this.shoppingService.addShoppingItem(newIng);
     }
     this.onClear();
@@ -53,12 +52,12 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.shoppingForm.reset();
   }
 
-  onDeleteItem(){
+  onDeleteItem() {
     this.shoppingService.onDeleteIngredient(this.editedIndex);
     this.onClear();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.ingredientSubscription.unsubscribe();
   }
 }
