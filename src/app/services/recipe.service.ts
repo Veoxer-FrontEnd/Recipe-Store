@@ -16,7 +16,7 @@ export class RecipeService {
     'https://cdn.pixabay.com/photo/2016/06/15/19/09/food-1459693_960_720.jpg',
     [new Ingredient("Meat", 1),
     new Ingredient("BBQ Sauce", 2)
-  ]),
+  ], 0),
     new Recipe(2,
       'Tempeh Salad', 
     'Fresh vegan food', 
@@ -24,7 +24,7 @@ export class RecipeService {
     [new Ingredient("Onion", 2),
     new Ingredient("Lettuce", 1),
     new Ingredient("Tomatoes", 3)
-  ])];
+  ], 0)];
   manageRecipe = new Subject<Recipe>();
   manageRecipesList = new Subject<Recipe[]>();
   
@@ -32,6 +32,10 @@ export class RecipeService {
 
   getRecipes(){
     return this.recipes.slice();
+  }
+
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
   }
 
   onLoadRecipeDetails(id: number): Recipe{
@@ -67,8 +71,8 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number){
-    const index = this.recipes.findIndex(recip => recip.Id === id);
-    this.recipes.splice(index, 1);
-    this.manageRecipesList.next(this.recipes.slice());
+    this.recipes.find(recip => recip.Id === id).State = 2;
+    // this.recipes.splice(index, 1);
+    // this.manageRecipesList.next(this.recipes.slice());
   }
 }

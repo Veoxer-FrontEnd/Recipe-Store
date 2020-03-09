@@ -35,6 +35,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeName = '';
     let recipeDescription = '';
     let recipeImgPath = '';
+    let recipeState = 0;
     let recipeIngredients = new FormArray([]);
 
     if(this.editMode){
@@ -42,12 +43,13 @@ export class RecipeEditComponent implements OnInit {
       recipeName = editedRecipe.Name;
       recipeDescription = editedRecipe.Description;
       recipeImgPath = editedRecipe.ImgPath;
+      recipeState = editedRecipe.Id > 0 ? 1 : 0;
       if(editedRecipe['Ingredients']){
         for(let ingredient of editedRecipe.Ingredients){
           recipeIngredients.push(
             new FormGroup({
               'name': new FormControl(ingredient.name, Validators.required),
-              'amount': new FormControl(ingredient.amount, [Validators.pattern(/^[1-9][0-9]*$/) ,Validators.required])
+              'amount': new FormControl(ingredient.amount, [Validators.pattern(/^[1-9][0-9]*$/), Validators.required])
           }));
         }
       }
@@ -57,6 +59,7 @@ export class RecipeEditComponent implements OnInit {
       'Name': new FormControl(recipeName, Validators.required),
       'Description': new FormControl(recipeDescription, Validators.required),
       'ImgPath' : new FormControl(recipeImgPath, Validators.required),
+      'State' : new FormControl(recipeState, Validators.required),
       'Ingredients': recipeIngredients
     });
   }

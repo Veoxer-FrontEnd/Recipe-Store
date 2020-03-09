@@ -1,15 +1,28 @@
 import { Component } from '@angular/core';
+import { RecipesStorageService } from '../services/recipes-storage.service';
 
 @Component({
-    selector:'app-header',
-    templateUrl:'./header.component.html',
+    selector: 'app-header',
+    templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-export class HeaderComponent{
+export class HeaderComponent {
 
     // @Output() loadSection = new EventEmitter<string>();
 
-    constructor() {
+    constructor(private recipesStorageService: RecipesStorageService) {
+    }
+
+    onSaveData() {
+        this.recipesStorageService.updateOrDelete();
+    }
+
+    onFetchData() {
+        this.recipesStorageService.fetchRecipes().subscribe(data => {
+            console.log(data)
+        }, error => {
+            console.log(error);
+        });
     }
 
     // loadRecipes(){
