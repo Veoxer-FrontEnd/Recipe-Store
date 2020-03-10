@@ -16,8 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { DeletedRecipesFilter } from './recipes/deleted-recipes-filter.pipe';
 import { AuthHttpInterceptors } from './services/auth-interceptors.service';
+import { HideOnClickDirective } from './directives/hide-onlick.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { AuthHttpInterceptors } from './services/auth-interceptors.service';
     RecipeEditComponent,
     RecipeStartComponent,
     ErrorPageComponent,
-    DeletedRecipesFilter,
+    HideOnClickDirective
   ],
   imports: [
     HttpClientModule,

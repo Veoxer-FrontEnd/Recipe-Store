@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-    <img src="{{ recipe.imgPath }}" alt="" class="img-responsive" style="max-height: 300px;">
+        <img src="{{ recipe.imgPath }}" alt="" class="img-responsive" style="max-height: 300px;">
     </div>
 </div>
 <div class="row">
@@ -30,10 +30,11 @@
 <div class="row">
     <div class="col-xs-12">
         <ul class="list-group">
-            <li class="list-group-item"
-            *ngFor="let ingElement of recipe.ingredients">
-            {{ ingElement.name }} <span class="badge">{{ ingElement.amount }}</span>
-        </li>
+            <div *ngFor="let ingElement of recipe.ingredients">
+                <li *ngIf="ingElement.state !== 2" class="list-group-item">
+                    {{ ingElement.name }} <span class="badge">{{ ingElement.amount }}</span>
+                </li>
+            </div>
         </ul>
     </div>
 </div>

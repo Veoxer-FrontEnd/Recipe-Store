@@ -1,12 +1,13 @@
 <div class="row">
     <div class="col-xs-12">
         <form (ngSubmit)="onSubmit()" [formGroup]="recipeForm">
-          <input type="hidden" formControlName="id">
-          <input type="hidden" formControlName="state">
+            <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="state">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group btn-toolbar">
-                        <button class="btn btn-success" [disabled]="!recipeForm.valid" (ngSubmit)='onSubmit()' type=submit>Save</button>
+                        <button class="btn btn-success" [disabled]="!recipeForm.valid" (ngSubmit)='onSubmit()'
+                            type=submit>Save</button>
                         <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
                     </div>
                 </div>
@@ -46,26 +47,31 @@
             <hr>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="button" style="margin-bottom:20px;" (click)="onAddIngredients()">Add Ingredients</button>
+                    <button class="btn btn-success" type="button" style="margin-bottom:20px;"
+                        (click)="onAddIngredients()">Add Ingredients</button>
                 </div>
             </div>
             <div class="row" formArrayName="ingredients">
-                <div class="col-xs-12" class="form-group" *ngFor="let ingredients of ingredientsForm; let i = index;" [formGroupName]="i">
-                  <input type="hidden" class="form-control" formControlName="id">
-                  <input type="hidden" class="form-control" formControlName="state">
-                  <div class="col-xs-7">
-                        <div class="form-group">
-                            <input type="text" class="form-control" formControlName="name">
+                <div class="col-xs-12" class="form-group"
+                    *ngFor="let ingredient of ingredientsForm; let i = index;"
+                    [formGroupName]="i">
+                    <div hideOnClick *ngIf="ingredient.state !== 2">
+                        <input type="hidden" class="form-control" formControlName="id">
+                        <input type="hidden" class="form-control" formControlName="state">
+                        <div class="col-xs-7">
+                            <div class="form-group">
+                                <input type="text" class="form-control" formControlName="name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="form-group">
-                            <input type="number" class="form-control" formControlName="amount">
+                        <div class="col-xs-3">
+                            <div class="form-group">
+                                <input type="number" class="form-control" formControlName="amount">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="form-group">
-                            <button class="btn btn-danger" type="button" (click)="onDeleteIngredient(i)">X</button>
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <button class="btn btn-danger" type="button" (click)="onDeleteIngredient(i)">X</button>
+                            </div>
                         </div>
                     </div>
                 </div>

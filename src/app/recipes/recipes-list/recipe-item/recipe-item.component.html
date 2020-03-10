@@ -1,6 +1,7 @@
 <a [routerLink]="[id]"
  routerLinkActive="active"
-class="list-group-item clearfix" >
+class="list-group-item clearfix"
+*ngIf="recipeItem.state !== 2">
     <div class="pull-left">
         <h4 class="list-group-item-heading">{{ recipeItem.name }}</h4>
         <p class="list-group-item-text">{{ recipeItem.description }}</p>

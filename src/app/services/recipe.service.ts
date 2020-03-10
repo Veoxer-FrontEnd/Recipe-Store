@@ -56,7 +56,7 @@ export class RecipeService {
     this.recipes.push(recipe);
     this.manageRecipesList.next(this.recipes.slice());
 
-    return this.recipes.length;
+    return (this.recipes.length - 1);
   }
 
   updateRecipe(id: number, recipe: Recipe) {
@@ -65,7 +65,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    if(this.recipes[id].id == null && this.recipes[id].id < 1){
+    if(this.recipes[id].id == null || this.recipes[id].id < 1){
       this.recipes.splice(id, 1);
     }
     else {
