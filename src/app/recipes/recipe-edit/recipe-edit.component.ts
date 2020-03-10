@@ -50,7 +50,8 @@ export class RecipeEditComponent implements OnInit {
             new FormGroup({
               id: new FormControl(ingredient.id),
               name: new FormControl(ingredient.name, Validators.required),
-              amount: new FormControl(ingredient.amount, [Validators.pattern(/^[1-9][0-9]*$/), Validators.required])
+              amount: new FormControl(ingredient.amount, [Validators.pattern(/^[1-9][0-9]*$/), Validators.required]),
+              state: new FormControl(ingredient.id != null && ingredient.id > 0 ? 1 : 0)
           }));
         }
       }
@@ -75,7 +76,12 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onDeleteIngredient(index: number) {
-    (this.recipeForm.get('ingredients') as FormArray).removeAt(index);
+    if((this.recipeForm.get('ingredients') as FormArray)[index].state == 1) {
+      (this.recipeForm.get('ingredients') as FormArray)[index].state = 2;
+    }
+    else {
+      (this.recipeForm.get('ingredients') as FormArray).removeAt(index);
+    }
   }
 
   onCancel() {

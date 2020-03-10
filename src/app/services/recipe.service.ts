@@ -65,7 +65,13 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    this.recipes[id].state = 2;
+    if(this.recipes[id].id == null && this.recipes[id].id < 1){
+      this.recipes.splice(id, 1);
+    }
+    else {
+      this.recipes[id].state = 2;
+    }
+    
     this.manageRecipesList.next(this.recipes.slice());
     // this.recipes.splice(index, 1);
     // this.manageRecipesList.next(this.recipes.slice());

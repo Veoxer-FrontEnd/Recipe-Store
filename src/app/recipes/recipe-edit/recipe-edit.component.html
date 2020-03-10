@@ -52,6 +52,7 @@
             <div class="row" formArrayName="ingredients">
                 <div class="col-xs-12" class="form-group" *ngFor="let ingredients of ingredientsForm; let i = index;" [formGroupName]="i">
                   <input type="hidden" class="form-control" formControlName="id">
+                  <input type="hidden" class="form-control" formControlName="state">
                   <div class="col-xs-7">
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="name">
