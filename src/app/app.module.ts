@@ -18,6 +18,7 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthHttpInterceptors } from './services/auth-interceptors.service';
 import { HideOnClickDirective } from './directives/hide-onlick.directive';
+import { AuthPageComponent } from './auth-page/auth-page.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HideOnClickDirective } from './directives/hide-onlick.directive';
     RecipeEditComponent,
     RecipeStartComponent,
     ErrorPageComponent,
-    HideOnClickDirective
+    HideOnClickDirective,
+    AuthPageComponent
   ],
   imports: [
     HttpClientModule,
