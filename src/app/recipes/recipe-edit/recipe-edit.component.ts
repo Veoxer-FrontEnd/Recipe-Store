@@ -86,11 +86,9 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onDeleteIngredient(index: number) {
-    this.editedRecipe.ingredients
-    if((this.recipeForm.get('ingredients') as FormArray).at(index).get('state').value == 1) {
+    if ((this.recipeForm.get('ingredients') as FormArray).at(index).get('state').value == 1) {
       (this.recipeForm.get('ingredients') as FormArray).at(index).patchValue({ state: 2 });
-    }
-    else {
+    } else {
       (this.recipeForm.get('ingredients') as FormArray).removeAt(index);
     }
   }

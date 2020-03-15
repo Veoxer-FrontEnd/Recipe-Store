@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -43,6 +44,7 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    JwtModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptors, multi: true}],
   bootstrap: [AppComponent]

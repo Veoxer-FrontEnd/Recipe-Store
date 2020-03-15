@@ -1,85 +1,92 @@
 <div class="row">
-    <div class="col-xs-6 col-xs-offset-3 mt-4">
-        <div class="panel panel-login">
-            <div class="panel-body">
-                <h2 class="text-primary" style="text-align: center;margin-bottom: 40px;">
-                    {{ isLogIn ? 'Welcome Back' : 'Sign Up' }}</h2>
-                <div *ngIf="isLoading" class="col-md-4 col-md-offset-4">
-                    <div class="loader">Loading...</div>
-                </div>
-                <form *ngIf="!isLoading" (ngSubmit)="onSubmit()" [formGroup]="authForm">
-                    <div *ngIf="!isLogIn">
-                        <div *ngIf="errorMessage !== ''" class="form-group alert alert-danger">
-                            <p>{{ errorMessage }}</p>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group col-xs-6 col-xs-offset-3">
-                                <span class="input-group-addon" id="basic-addon1">@</span>
-                                <input type="text" class="form-control" placeholder="Email"
-                                    aria-describedby="basic-addon1" formControlName="email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group col-xs-6 col-xs-offset-3">
-                                <input type="text" class="form-control" placeholder="Username"
-                                    formControlName="userName">
-                                    <p class="text text-danger"
-                                    *ngIf="authForm.get('userName').touched && !authForm.get('userName').valid && authForm.get('userName').errors?.minlength">
-                                    The minimum length is 2!
-                                </p>
-                                <p class="text text-danger"
-                                *ngIf="authForm.get('userName').touched && !authForm.get('userName').valid && authForm.get('userName').errors?.required">
-                                The username is required!
-                            </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="isLogIn">
-                        <div class="form-group">
-                            <div class="input-group col-xs-6 col-xs-offset-3">
-                                <span class="input-group-addon" id="basic-addon1">@</span>
-                                <input type="text" class="form-control" placeholder="Email/Username"
-                                    aria-describedby="basic-addon1" formControlName="login">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group col-xs-6 col-xs-offset-3">
-                            <input type="password" class="form-control" placeholder="Password"
-                                formControlName="password" #password>
-                                <p class="text text-danger"
-                                *ngIf="authForm.get('password').touched && !authForm.get('password').valid && authForm.get('password').errors?.minlength">
-                                The minimum length is 6!
-                            </p>
-                            <p class="text text-danger"
-                            *ngIf="authForm.get('password').touched && !authForm.get('password').valid && authForm.get('password').errors?.required">
-                            The password is required!
-                        </p>
-                        </div>
-                    </div>
-                    <div class="form-group" *ngIf="!isLogIn">
-                        <div class="input-group col-xs-6 col-xs-offset-3">
-                            <input type="password" class="form-control" placeholder="Confirm Password"
-                                [ngClass]="{'custom-invalid-input': authForm.get('passwordConfirm').touched && authForm.errors?.passwordsMismatch}"
-                                formControlName="passwordConfirm">
-                            <p class="text text-danger"
-                                *ngIf="authForm.get('passwordConfirm').touched && authForm.errors?.passwordsMismatch">
-                                Passwords don't match
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group btn-toolbar" style="margin-top: 40px;">
-                        <div class="col-xs-6 col-xs-offset-3">
-                            <button type="submit" 
-                                class="btn submit-btn-veo btn-hover-effect btn-block">{{ isLogIn ? 'Log In' :  'Create Account'}}</button>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-xs-offset-3" *ngIf="!isLogIn">
-                        <p class="text" style="color: grey;">Already have an account? <a routerLink='/login'>Log In</a>
-                        </p>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <div class="col-xs-12 col-md-6 col-sm-12 col-md-offset-3 mt-4">
+    <div *ngIf="isLoading" class="col-md-4 col-md-offset-4">
+      <div class="loader loading-spinner">Loading...</div>
     </div>
+    <div class="panel panel-login" [ngClass]="{ 'hid': isLoading, 'show' : !isLoading }">
+      <div class="panel-body">
+        <h2 class="text-primary" style="text-align: center;margin-bottom: 40px;">
+          {{ isLogIn ? 'Welcome Back' : 'Sign Up' }}</h2>
+        <form (ngSubmit)="onSubmit()" [formGroup]="authForm">
+          <div *ngIf="errorMessage !== ''"
+               class="form-group alert alert-danger col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <p>{{ errorMessage }}</p>
+          </div>
+          <div *ngIf="!isLogIn">
+            <div class="form-group">
+              <div class="input-group col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <span class="input-group-addon" id="basic-addon">@</span>
+                <input type="text" class="form-control" placeholder="Email"
+                       aria-describedby="basic-addon1" formControlName="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <input type="text" class="form-control" placeholder="Username"
+                       formControlName="userName">
+                <p class="text text-danger"
+                   *ngIf="authForm.get('userName').touched && !authForm.get('userName').valid && authForm.get('userName').errors?.minlength">
+                  The minimum length is 2!
+                </p>
+                <p class="text text-danger"
+                   *ngIf="authForm.get('userName').touched && !authForm.get('userName').valid && authForm.get('userName').errors?.required">
+                  The username is required!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isLogIn">
+            <div class="form-group">
+              <div class="input-group col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Email/Username"
+                       aria-describedby="basic-addon1" formControlName="login">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+              <input type="password" class="form-control" placeholder="Password"
+                     formControlName="password" #password>
+              <p class="text text-danger"
+                 *ngIf="authForm.get('password').touched && !authForm.get('password').valid && authForm.get('password').errors?.minlength">
+                The minimum length is 6!
+              </p>
+              <p class="text text-danger"
+                 *ngIf="authForm.get('password').touched && !authForm.get('password').valid && authForm.get('password').errors?.required">
+                The password is required!
+              </p>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="!isLogIn">
+            <div class="input-group col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+              <input type="password" class="form-control" placeholder="Confirm Password"
+                     [ngClass]="{'custom-invalid-input': authForm.get('passwordConfirm').touched && authForm.errors?.passwordsMismatch}"
+                     formControlName="passwordConfirm">
+              <p class="text text-danger"
+                 *ngIf="authForm.get('passwordConfirm').touched && authForm.errors?.passwordsMismatch">
+                Passwords don't match
+              </p>
+            </div>
+          </div>
+          <div class="form-group btn-toolbar" style="margin-top: 40px;">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+              <button type="submit" [disabled]="!authForm.valid"
+                      class="btn submit-btn-veo btn-hover-effect btn-block">{{ isLogIn ? 'Log In' : 'Create Account'}}</button>
+            </div>
+          </div>
+          <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div *ngIf="!isLogIn; else registerLink">
+              <p class="text info-text">Already have an account? <a routerLink='/login'>Log In</a>
+              </p>
+            </div>
+            <ng-template #registerLink>
+              <p class="text info-text">New to the website? <a routerLink='/register'>Sign Up</a>
+              </p>
+            </ng-template>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

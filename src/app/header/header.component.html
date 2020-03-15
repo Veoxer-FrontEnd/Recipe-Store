@@ -1,23 +1,25 @@
-<div class="navbar navbar-default">
+<div class="navbar navbar-inverse navbar-sharp-edge">
     <div class="container-fluid">
         <div class="navbar-header">
             <a routerLink="/" class="navbar-brand">Recipe Store</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li routerLinkActive="active"><a routerLink="/recipes" >Recipes</a></li>
-                <li routerLinkActive="active"><a routerLink='shopping-list' >Shopping List</a></li>
+                <li *ngIf="isAuthenticated" routerLinkActive="active"><a routerLink="/recipes" >Recipes</a></li>
+                <li *ngIf="isAuthenticated" routerLinkActive="active"><a routerLink='shopping-list' >Shopping List</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li routerLinkActive="active"><a routerLink="/login" >Log In</a></li>
-                <li routerLinkActive="active"><a routerLink="/register" >Sign Up</a></li>
-                <li class="dropdown" appDropdown>
+                <li *ngIf="!isAuthenticated" routerLinkActive="active"><a routerLink="/login" >Log In</a></li>
+                <li *ngIf="!isAuthenticated" routerLinkActive="active"><a routerLink="/register" >Sign Up</a></li>
+              <li *ngIf="isAuthenticated" routerLinkActive="active"><a (click)="onLogout()" >Logout</a></li>
+                <li *ngIf="isAuthenticated" class="dropdown" appDropdown>
                     <a class="dropdown-toggle" role="button">Manage<span class="caret"></span></a>
-                    <ul class="dropdown-menu"> 
+                    <ul class="dropdown-menu">
                         <li><a (click)="onSaveData()">Save Data</a></li>
                         <li><a (click)="onFetchData()">Fetch Data</a></li>
                     </ul>
                 </li>
+              <p *ngIf="isAuthenticated" class="navbar-text"> Hello, {{ username }}</p>
             </ul>
         </div>
     </div>

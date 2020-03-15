@@ -1,11 +1,22 @@
-import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
+import {HttpInterceptor, HttpRequest, HttpHandler, HttpHeaders} from '@angular/common/http';
+import {AuthService} from './auth.service';
+import {exhaustMap, take} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
 
-export class AuthHttpInterceptors implements HttpInterceptor{
-    intercept(req: HttpRequest<any>, next: HttpHandler){
+@Injectable()
+export class AuthHttpInterceptors implements HttpInterceptor {
 
-        console.log("test");
+    constructor(private authService: AuthService) {}
 
-        console.log(req.body);
+    intercept(req: HttpRequest<any>, next: HttpHandler) {
+      return this.authService.authenticatedUser.pipe(take(1), exhaustMap(userData => {
+        if (!req.url.includes('api/auth/')) {
+          console.log(req.url);
+          req = req.clone({
+            headers: new HttpHeaders().set('Authorization', 'Bearer ' + userData.token)
+          });
+        }
         return next.handle(req);
+      }));
     }
 }

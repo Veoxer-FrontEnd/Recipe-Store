@@ -6,43 +6,59 @@
     border-color: #51b9ff;
 }
 
+.info-text {
+  color: grey;
+  text-align: center
+}
+
 .submit-btn-veo:hover {
     background: #82c5f3;
     border-color: #82c5f3;
     transition: width .2s ease,height .2s ease;
 }
 
+.loading-spinner {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.hid {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.show {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+
 .mt-4 {
     margin-top: 5rem;
 }
 
 .panel-login {
-    box-shadow: 2px 3px 10px 0px lightgrey; 
+  box-shadow: -1px -2px 5px 2px rgba(0,0,0,.05);
 }
 
 input.ng-touched.ng-invalid, .custom-invalid-input {
   border: 1px solid rgb(228, 80, 80);
 }
 
-@media screen 
-  and (device-width: 360px) 
-  and (device-height: 640px) 
-  and (-webkit-device-pixel-ratio: 2) {
-
-
-
-}
-
 .loader {
   z-index: 999;
-  right: 0px;
   color: #337ab7;
   font-size: 20px;
   margin: 150px auto;
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   text-indent: -9999em;
   -webkit-animation: load4 1.3s infinite linear;
   animation: load4 1.3s infinite linear;
